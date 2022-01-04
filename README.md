@@ -14,6 +14,4 @@
   - for [PureConnect On-Premise](scripts/icws_premise_authentication.py)
   - for [PureConnect Cloud via Internet](scripts/icws_cloud_authentication.py) 
 
-Feel free to reach out to me with any questions, I do love a good coding challenge :v:
-
 > **This project/work is my own and is in no way associated/attributed to any current or former employer. See [license file](LICENSE) regarding permissions, limitations, and  conditions. I do advise testing any of the provided scripts in a DEV or non-PROD environment first before running it in a PROD environment. For some large output-file base scripts it is better to run them outside of the peak hours.**
