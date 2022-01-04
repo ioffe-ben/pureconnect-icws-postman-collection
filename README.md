@@ -1,1 +1,4 @@
 # pureconnect-postman-collections
+
+pureconnect_cloud_authentication
+pureconnect_permise_authentication
