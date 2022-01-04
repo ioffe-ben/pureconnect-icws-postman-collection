@@ -1,94 +1,227 @@
 {
-	"variables": [],
 	"info": {
+		"_postman_id": "25176d85-4e78-4215-901b-4f22f88868b0",
 		"name": "PureConnect ICWS Postman Collection",
-		"_postman_id": "35567af6-6b92-26c2-561a-21fe8aeeb1ea",
-		"description": "A sample collection to demonstrate collections as a set of related requests",
-		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "A simple GET request",
-			"event": [
-				{
-					"listen": "test",
-					"script": {
-						"type": "text/javascript",
-						"exec": [
-							"pm.test('expect response be 200', function () {",
-							"    pm.response.to.be.ok",
-							"})",
-							"pm.test('expect response json contain args', function () {",
-							"    pm.expect(pm.response.json().args).to.have.property('source')",
-							"      .and.equal('newman-sample-github-collection')",
-							"})"
-						]
-					}
+			"name": "Connect to ICWS",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
 				}
-			],
+			},
 			"request": {
-				"url": {
-					"raw": "https://postman-echo.com/get?source=newman-sample-github-collection",
-					"protocol": "https",
-					"host": [
-						"postman-echo",
-						"com"
-					],
-					"path": [
-						"get"
-					],
-					"query": [
-						{
-							"key": "source",
-							"value": "newman-sample-github-collection",
-							"equals": true,
-							"description": ""
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-us",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"__type\": \"urn:inin.com:connection:icAuthConnectionRequestSettings\",\r\n    \"applicationName\": \"PureConnect ICWS Postman Test\",\r\n    \"userID\": \"{{user}}\",\r\n    \"password\": \"{{password}}\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
 						}
+					}
+				},
+				"url": {
+					"raw": "http://{{server}}:8018/icws/connection",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
 					],
-					"variable": []
-				},
+					"port": "8018",
+					"path": [
+						"icws",
+						"connection"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get User status (to verify that API is returning data",
+			"request": {
 				"method": "GET",
-				"header": [],
-				"body": {},
-				"description": ""
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-us",
+						"type": "text"
+					},
+					{
+						"key": "ININ-ICWS-CSRF-Token",
+						"value": "{{csrfToken}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "http://{{server}}:8018/icws/{{sessionid}}/status/user-statuses/{{user}}",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "8018",
+					"path": [
+						"icws",
+						"{{sessionid}}",
+						"status",
+						"user-statuses",
+						"{{user}}"
+					]
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "A simple POST request",
+			"name": "Create subscription to handler-sent notifications",
+			"protocolProfileBehavior": {
+				"disabledSystemHeaders": {
+					"content-type": true
+				}
+			},
 			"request": {
-				"url": "https://postman-echo.com/post",
-				"method": "POST",
+				"method": "PUT",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "text/plain"
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-us",
+						"type": "text"
+					},
+					{
+						"key": "ININ-ICWS-CSRF-Token",
+						"value": "{{csrfToken}}",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "Duis posuere augue vel cursus pharetra. In luctus a ex nec pretium..."
+					"raw": "{\r\n    \"headers\": [{\r\n        \"objectId\": \"PureConnect ICWS Postman Test\",\r\n        \"eventIds\": [\"PureConnect ICWS Postman Test_Response\"]\r\n    }]\r\n}"
 				},
-				"description": ""
+				"url": {
+					"raw": "http://{{server}}:8018/icws/{{sessionid}}/messaging/subscriptions/system/handler-sent-notifications",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "8018",
+					"path": [
+						"icws",
+						"{{sessionid}}",
+						"messaging",
+						"subscriptions",
+						"system",
+						"handler-sent-notifications"
+					]
+				}
 			},
 			"response": []
 		},
 		{
-			"name": "A simple POST request with JSON body",
+			"name": "Send request to a custom handler",
 			"request": {
-				"url": "https://postman-echo.com/post",
 				"method": "POST",
 				"header": [
 					{
 						"key": "Content-Type",
-						"value": "application/json"
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-us",
+						"type": "text"
+					},
+					{
+						"key": "ININ-ICWS-CSRF-Token",
+						"value": "{{csrfToken}}",
+						"type": "text"
 					}
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\"text\":\"Duis posuere augue vel cursus pharetra. In luctus a ex nec pretium...\"}"
+					"raw": "{\r\n  \"objectId\": \"PureConnect ICWS Postman Test\",\r\n  \"eventId\": \"PureConnect ICWS Postman Test_Request\",\r\n  \"data\": [\r\n    \"test 0\",\r\n    \"test 1\"\r\n  ]\r\n}"
 				},
-				"description": ""
+				"url": {
+					"raw": "http://{{server}}:8018/icws/{{sessionid}}/system/handler-notification",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "8018",
+					"path": [
+						"icws",
+						"{{sessionid}}",
+						"system",
+						"handler-notification"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Retrieves any queued notifications",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					},
+					{
+						"key": "Accept-Language",
+						"value": "en-us",
+						"type": "text"
+					},
+					{
+						"key": "ININ-ICWS-CSRF-Token",
+						"value": "{{csrfToken}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://{{server}}:8018/icws/{{sessionid}}/messaging/messages",
+					"protocol": "http",
+					"host": [
+						"{{server}}"
+					],
+					"port": "8018",
+					"path": [
+						"icws",
+						"{{sessionid}}",
+						"messaging",
+						"messages"
+					]
+				}
 			},
 			"response": []
 		}
