@@ -1,4 +1,4 @@
-## What are in the PureConnect ICWS Postman Collection v2.1.0? 
+## What are in the PureConnect ICWS Postman Collection? 
 ***How to:***
 - connect to PureConnect Cloud and Permise enviroment
 - retrive IC user status
