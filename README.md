@@ -1,10 +1,10 @@
 ## What are in the PureConnect ICWS Postman Collection v2.1.0? 
 ***How to:***
-- (POST) connect to PureConnect Cloud and Permise enviroment
-- (GET) retrive IC user status
-- (PUT) create subscription to handler-sent notifications
-- (POST) send request to a custom handler
-- (GET) retrieves any queued notifications
+- ```POST``` connect to PureConnect Cloud and Permise enviroment
+- ```GET``` retrive IC user status
+- ```PUT``` create subscription to handler-sent notifications
+- ```POST``` send request to a custom handler
+- ```GET``` retrieves any queued notifications
 
 ## Prerequisites
 - ICWS SDK license ([I3_FEATURE_ICWS_SDK](https://help.genesys.com/pureconnect/mergedProjects/wh_tr/mergedProjects/wh_tr_icws_sdk_icg/desktop/what_is_the_icws_sdk.htm)) for your PureConnect environment
