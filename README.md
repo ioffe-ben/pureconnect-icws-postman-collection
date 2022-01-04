@@ -1,4 +1,4 @@
-## What are in the PureConnect ICWS Postman Collection? 
+## What are in the PureConnect ICWS Postman Collection v2.1.0? 
 ***How to:***
 - connect to PureConnect Cloud and Permise enviroment
 - connect to PureConnect Cloud and Permise enviroment
